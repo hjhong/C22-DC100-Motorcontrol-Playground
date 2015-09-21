@@ -9,3 +9,10 @@ Remember to set the configuration of your motor in config/bldc_motor_config.h.
 * Enjoy 
 
 (xTimeComposer 14.0.3)
+
+![Position control application](http://s10.postimg.org/400f898c9/position.png)
+
+![Velocity control application](http://s4.postimg.org/dw0u997yl/speed.png)
+
+![Torque control application](http://s16.postimg.org/r7dsvbjqd/torque.png)
+
