@@ -1,0 +1,16 @@
+/*
+ *	IMPORTANT!!!
+ *
+ *	Your Application requires a particular SOMANET COM Module configured.
+ *  Please go back to your main (e.g. main.xc) file and replace "COM_BOARD_REQUIRED"
+ *  with one of the flowing board support packages:
+ *  
+ *    COM_ECAT-rev-a.inc
+ *  
+ */
+
+#pragma once
+
+#error "No SOMANET COM defined! Your Application has to include a SOMANET COM Module board support package. Please go back to your main (e.g. main.xc) file and replace "COM_BOARD_REQUIRED" with one of the flowing board support packages: \
+COM_ECAT-rev-a.inc \
+"

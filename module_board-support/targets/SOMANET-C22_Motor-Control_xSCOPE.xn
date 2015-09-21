@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Network xmlns="http://www.xmos.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.xmos.com http://www.xmos.com">
+
+    <Type>Board</Type>
+    <Name>SOMANET-C22: Motor control (w/XScope)</Name>
+
+    <Declarations>
+        <Declaration>tileref tile[4]</Declaration>
+    </Declarations>
+
+    <Packages>
+        <Package Id="0" Type="XS1-LnA-128-QF124">
+            <Nodes>
+                <Node Id="0" Type="XS1-L8A-64" InPackageId="0"
+                    Oscillator="25MHz" SystemFrequency="500MHz">
+                    <Boot>
+                        <Source Location="SPI:bootFlash" />
+                        <Bootee NodeId="1" />
+                        <Bootee NodeId="2" />
+                        <Bootee NodeId="3" />
+                    </Boot>
+                    <Tile Number="0" Reference="tile[0]">
+                        <Port Location="XS1_PORT_1A" Name="PORT_SPI_MISO" />
+                        <Port Location="XS1_PORT_1B" Name="PORT_SPI_SS" />
+                        <Port Location="XS1_PORT_1C" Name="PORT_SPI_CLK" />
+                        <Port Location="XS1_PORT_1D" Name="PORT_SPI_MOSI" />
+                    </Tile>
+                </Node>
+                <Node Id="1" Type="XS1-L8A-64" InPackageId="1"
+                    Oscillator="25MHz" SystemFrequency="500MHz">
+                    <Boot>
+                        <Source Location="LINK" />
+                    </Boot>
+                    <Tile Number="0" Reference="tile[1]">
+                        <Port Location="XS1_PORT_1K" Name="LED_BLUE" />
+                        <Port Location="XS1_PORT_1L" Name="LED_GREEN" />
+                        <Port Location="XS1_PORT_1M" Name="LED_RED" />
+                    </Tile>
+                </Node>
+            </Nodes>
+        </Package>
+        <Package Id="1" Type="XS1-LnA-128-QF124">
+            <Nodes>
+                <Node Id="2" Type="XS1-L8A-64" InPackageId="0"
+                    Oscillator="25MHz" SystemFrequency="500MHz">
+                    <Boot>
+                        <Source Location="LINK" />
+                    </Boot>
+                    <Tile Number="0" Reference="tile[2]">
+                    </Tile>
+                </Node>
+                <Node Id="3" Type="XS1-L8A-64" InPackageId="1"
+                    Oscillator="25MHz" SystemFrequency="500MHz"
+                    ReferenceFrequency="250Mhz">
+                    <Boot>
+                        <Source Location="LINK" />
+                    </Boot>
+                    <Tile Number="0" Reference="tile[3]">
+                    </Tile>
+                </Node>
+            </Nodes>
+        </Package>
+    </Packages>
+
+    <Links>
+        <!-- L2-1 internal -->
+        <Link Encoding="5wire" Delays="0,1">
+            <LinkEndpoint NodeId="0" Link="XLG" />
+            <LinkEndpoint NodeId="1" Link="XLF" />
+        </Link>
+        <Link Encoding="5wire" Delays="0,1">
+            <LinkEndpoint NodeId="0" Link="XLH" />
+            <LinkEndpoint NodeId="1" Link="XLE" />
+        </Link>
+        <Link Encoding="5wire" Delays="0,1">
+            <LinkEndpoint NodeId="0" Link="XLE" />
+            <LinkEndpoint NodeId="1" Link="XLH" />
+        </Link>
+        <Link Encoding="5wire" Delays="0,1">
+            <LinkEndpoint NodeId="0" Link="XLF" />
+            <LinkEndpoint NodeId="1" Link="XLG" />
+        </Link>
+
+        <!-- L2-1 to L2-2 -->
+        <!-- <Link Encoding="5wire" Delays="4,4">
+            <LinkEndpoint NodeId="1" Link="XLA"/>
+            <LinkEndpoint NodeId="2" Link="XLA"/>
+        </Link> -->
+
+        <Link Encoding="5wire" Delays="4,4">
+            <LinkEndpoint NodeId="1" Link="XLB" />
+            <LinkEndpoint NodeId="2" Link="XLB" />
+        </Link>
+
+        <!-- L2-2 internal -->
+        <Link Encoding="5wire" Delays="0,1">
+            <LinkEndpoint NodeId="2" Link="XLG" />
+            <LinkEndpoint NodeId="3" Link="XLF" />
+        </Link>
+        <Link Encoding="5wire" Delays="0,1">
+            <LinkEndpoint NodeId="2" Link="XLH" />
+            <LinkEndpoint NodeId="3" Link="XLE" />
+        </Link>
+        <Link Encoding="5wire" Delays="0,1">
+            <LinkEndpoint NodeId="2" Link="XLE" />
+            <LinkEndpoint NodeId="3" Link="XLH" />
+        </Link>
+        <Link Encoding="5wire" Delays="0,1">
+            <LinkEndpoint NodeId="2" Link="XLF" />
+            <LinkEndpoint NodeId="3" Link="XLG" />
+        </Link>
+
+        <!-- xSCOPE using XLink A of L2-1, which is otherwise used as 
+            a second link between L2-1 and L2-2 (see disabled link above) -->
+        <Link Encoding="2wire" Delays="4,5" Flags="SOD">
+            <LinkEndpoint NodeId="1" Link="X0LA" />
+            <LinkEndpoint RoutingID="0x8000" Chanend="1" />
+        </Link>
+    </Links>
+
+    <ExternalDevices>
+        <Device NodeId="0" Tile="0" Class="SPIFlash" Name="bootFlash"
+            Type="AT25DF041A">
+            <Attribute Name="PORT_SPI_MISO" Value="PORT_SPI_MISO" />
+            <Attribute Name="PORT_SPI_SS" Value="PORT_SPI_SS" />
+            <Attribute Name="PORT_SPI_CLK" Value="PORT_SPI_CLK" />
+            <Attribute Name="PORT_SPI_MOSI" Value="PORT_SPI_MOSI" />
+        </Device>
+    </ExternalDevices>
+
+    <JTAGChain>
+        <JTAGDevice NodeId="0" />
+        <JTAGDevice NodeId="1" />
+        <JTAGDevice NodeId="2" />
+        <JTAGDevice NodeId="3" />
+    </JTAGChain>
+
+</Network>

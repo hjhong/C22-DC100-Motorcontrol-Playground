@@ -1,0 +1,20 @@
+/*
+ *	IMPORTANT!!!
+ *
+ *	Your Application requires a particular SOMANET IFM Module configured.
+ *  Please go back to your main (e.g. main.xc) file and replace "IFM_BOARD_REQUIRED"
+ *  with one of the flowing board support packages:
+ *  
+ *    IFM_DC100-rev-a.inc
+ *    IFM_DC100-rev-b.inc
+ *    IFM_DC300-rev-a.inc
+ *  
+ */
+
+#pragma once
+
+#error "No SOMANET IFM defined! Your Application has to include a SOMANET IFM Module board support package. Please go back to your main (e.g. main.xc) file and replace "IFM_BOARD_REQUIRED" with one of the flowing board support packages: \
+IFM_DC100-rev-a.inc \
+IFM_DC100-rev-b.inc \
+IFM_DC300-rev-a.inc \
+"

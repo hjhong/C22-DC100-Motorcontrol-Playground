@@ -1,0 +1,18 @@
+/*
+ *	IMPORTANT!!!
+ *   
+ *  Your Application requires a SOMANET CORE Module configured.
+ *  Please go back to your main (e.g. main.xc) file and replace "CORE_BOARD_REQUIRED"
+ *  with one of the flowing board support packages:
+ *  
+ *    CORE_C22-rev-a.inc
+ *    CORE_C21-rev-a.inc
+ *  
+ */
+
+#pragma once
+
+#error "No SOMANET CORE defined! Your Application has to include a SOMANET CORE Module board support package. Please go back to your main (e.g. main.xc) file and replace "CORE_BOARD_REQUIRED" with one of the flowing board support packages: \
+CORE_C22.inc \
+CORE_C21-rev-a.inc \
+"

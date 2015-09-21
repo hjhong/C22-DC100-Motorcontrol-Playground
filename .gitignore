@@ -1,0 +1,23 @@
+## ignore XDE(ecipse) files
+.metadata/
+.settings/
+
+## generic files to ignore
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+
+## ignore build directories
+## and binary stuff ...
+.build_*
+*.d
+*.a
+*.so
+*.xe
+*.o
+bin/
+
+## ignore KDE files
+.directory
